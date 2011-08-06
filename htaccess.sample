@@ -1,0 +1,4 @@
+# sample .htaccess
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^/(_a/|favicon|cgi-bin)
+RewriteRule ^(.*)$ /cgi-bin/gnzkrz.pl/$1 [QSA,PT,L]
