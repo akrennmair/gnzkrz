@@ -1,0 +1,25 @@
+README for gnzkrz
+=================
+
+gnzkrz is a URL shortener software, developed in Perl and based on MeToo.pm. It 
+forms the base for the URL shortener service krzz.de.
+
+
+Author
+======
+
+Andreas Krennmair <ak@synflood.at>
+
+Links
+=====
+
+- krzz.de: http://krzz.de/
+- MeToo.pm: https://github.com/akrennmair/metoo-pm
+
+
+License
+=======
+
+gnzkrz is licensed under the MIT/X Consortium License. See the file LICENSE for 
+the complete license text.
+
