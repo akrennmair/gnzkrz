@@ -47,7 +47,7 @@ $html_header
 </form>
 </div>
 <div id=fineprint>
-<a href="{base}/_a/faq.html">FAQ</a> | <a href="mailto:admin\@krzz.de">Contact</a> | <a href="https://github.com/akrennmair/gnzkrz">Show me the code!</a>
+<a href="{base}/_a/faq.html">FAQ</a> | <a href="mailto:admin\@krzz.de">Contact</a> | <a href="https://github.com/akrennmair/gnzkrz">Show me the code!</a> | <a href="{base}/_a/imprint.html">Impressum</a>
 <br>
 shortened {url_count} URLs that were accessed {access_count} times.
 </div>
