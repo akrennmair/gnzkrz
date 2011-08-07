@@ -44,6 +44,15 @@ header, section { padding-left: 40px; }
 			disable abuse links as soon as possible.
 		</p>
 	</section>
+	<section>
+		<h1>Does your service provide an API to automate URL shortening?</h1>
+		<p>Yes. Just make GET requests on
+<pre>
+http://krzz.de/_api/save?url=&lt;your-url&gt;
+</pre>
+			and the returned body will contain the shortened URL in <tt>text/plain</tt> MIME type.
+		</p>
+	</section>
 </article>
 </body>
 </html>

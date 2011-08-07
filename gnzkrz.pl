@@ -62,18 +62,23 @@ post '/_/save' => sub {
 		return error_invalid_url($url);
 	}
 
-	my ($dbh, $prefix) = connect_db;
-
-	my $sth = $dbh->prepare("INSERT INTO ${prefix}_urls (url, remote_addr, created, access_count, enabled) VALUES (?, ?, NOW(), 0, 1)");
-
-	$sth->execute($url, $ENV{REMOTE_ADDR});
-	my $id = $dbh->last_insert_id(undef, undef, undef, undef);
-
-	$dbh->disconnect;
-
-	my $encoded_id = encode_id($id);
-
+	my $encoded_id = save_url($url);
 	redirect base_url . "/_/preview/$encoded_id";
+};
+
+get '/_api/save' => sub {
+	my $url = params->{url};
+
+	content_type("text/plain");
+
+	if ($url !~ /^https?:\/\/[^\/]+\/?.*$/) {
+		return "error: invalid URL";
+	}
+
+	my $encoded_id = save_url($url);
+	t(<<END, base_url => base_url, id => $encoded_id);
+{base_url}/{id}
+END
 };
 
 get '/_/preview/(.*)' => sub {
@@ -184,4 +189,20 @@ $html_header
 </div>
 $html_footer
 END
+}
+
+sub save_url($) {
+	my $url = shift;
+	my ($dbh, $prefix) = connect_db;
+
+	my $sth = $dbh->prepare("INSERT INTO ${prefix}_urls (url, remote_addr, created, access_count, enabled) VALUES (?, ?, NOW(), 0, 1)");
+
+	$sth->execute($url, $ENV{REMOTE_ADDR});
+	my $id = $dbh->last_insert_id(undef, undef, undef, undef);
+
+	$dbh->disconnect;
+
+	my $encoded_id = encode_id($id);
+
+	return $encoded_id;
 }
