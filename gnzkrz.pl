@@ -193,6 +193,14 @@ END
 
 sub save_url($) {
 	my $url = shift;
+	my $base_url = base_url;
+	if (substr($url, 0, length($base_url)) eq $base_url) {
+		my $rest = substr($url, length($base_url)+1, length($url));
+		if ($rest !~ /^_/) {
+			return $rest;
+		}
+	}
+
 	my ($dbh, $prefix) = connect_db;
 
 	my $id;
