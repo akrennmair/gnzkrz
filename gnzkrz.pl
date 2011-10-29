@@ -195,10 +195,18 @@ sub save_url($) {
 	my $url = shift;
 	my ($dbh, $prefix) = connect_db;
 
-	my $sth = $dbh->prepare("INSERT INTO ${prefix}_urls (url, remote_addr, created, access_count, enabled) VALUES (?, ?, NOW(), 0, 1)");
+	my $id;
 
-	$sth->execute($url, $ENV{REMOTE_ADDR});
-	my $id = $dbh->last_insert_id(undef, undef, undef, undef);
+	my $sth = $dbh->prepare("SELECT id FROM ${prefix}_urls WHERE url = ? LIMIT 1");
+	$sth->execute($url);
+	my $row = $sth->fetchrow_hashref;
+	if ($row) {
+		$id = $row->{id};
+	} else {
+		$sth = $dbh->prepare("INSERT INTO ${prefix}_urls (url, remote_addr, created, access_count, enabled) VALUES (?, ?, NOW(), 0, 1)");
+		$sth->execute($url, $ENV{REMOTE_ADDR});
+		$id = $dbh->last_insert_id(undef, undef, undef, undef);
+	}
 
 	$dbh->disconnect;
 
