@@ -296,6 +296,7 @@ sub save_url($) {
 		$sth = $dbh->prepare("INSERT INTO ${prefix}_urls (url, remote_addr, created, access_count, enabled) VALUES (?, ?, NOW(), 0, 1)");
 		$sth->execute($url, $ENV{REMOTE_ADDR});
 		$id = $dbh->last_insert_id(undef, undef, undef, undef);
+		$sth->finish;
 	}
 
 	$dbh->disconnect;
