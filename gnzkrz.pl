@@ -25,6 +25,12 @@ body { padding-top: 60px; }
 END
 
 my $html_footer = <<END;
+<footer style="text-align: center">
+	<div class="container navbar muted navbar-fixed-bottom">
+		<p>&copy; 2012-2013 Andreas Krennmair</p>
+		<p>Source code available on <a href="https://github.com/akrennmair/gnzkrz">GitHub</a></p>
+	</div>
+</footer>
 </body>
 </html>
 END
