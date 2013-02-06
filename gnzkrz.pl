@@ -242,7 +242,7 @@ sub error_unknown_url_id($) {
 
 	my $html_menu = get_menu("error_unknown_url");
 
-	return t(<<END, base => base, id => $encoded_id, title => "krzz.de | Error");
+	return t(<<END, base => base, id => $encoded_id, title => "krzz.de | Error");
 $html_header
 $html_menu
 <div class="container">
@@ -260,7 +260,7 @@ sub error_invalid_url($) {
 
 	my $html_menu = get_menu("error_invalid_url");
 
-	return t(<<END, base => base, url => cgi->escapeHTML($url), title => "krzz.de | Error");
+	return t(<<END, base => base, url => cgi->escapeHTML($url), title => "krzz.de | Error");
 $html_header
 $html_menu
 <div class="container">
